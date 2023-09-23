@@ -5,44 +5,21 @@ const Tasks = ()=>{
     const[add, setAdd]= useState('');
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
-        function readTasks () {
-            fetch("https://playground.4geeks.com/apis/fake/todos/user/jaromeroibz")
-            .then( (response) => response.json() )
-            .then( (data) => console.log(data))
-        };
-
-        function createUser () {
+        function addTask (e) {
+            e.preventDefault();  
+            // setTasks([...tasks, data]);
+            // setAdd('');      
 
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify([])
+                body: JSON.stringify({ task: add })
             };
 
-            fetch('https://playground.4geeks.com/apis/fake/todos/user/jaromeroibz', requestOptions)
+            fetch('https://playground.4geeks.com/apis/fake/todos/user/javierromero', requestOptions)
                 .then(response => response.json())
-                .then(data => console.log(data));
+                .then((data) => {console.log(data)})
 
-        };
-
-        function addTask (e) {
-            e.preventDefault();
-            console.log("Prueba")
-            setTasks([...tasks, add])
-            setAdd('');
-            
-
-            const requestOptions = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify([tasks])
-            };
-
-            fetch('https://playground.4geeks.com/apis/fake/todos/user/jaromeroibz', requestOptions)
-                .then(response => response.json())
-                .then(data => console.log(data));
-
-            console.log(tasks)
         };
 
         const deleteTask = (index) => {
@@ -51,16 +28,14 @@ const Tasks = ()=>{
             setTasks(newList);
 
             const requestOptions = {
-                method: 'PUT',
+                method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify([newList])
             };
 
-            fetch('https://playground.4geeks.com/apis/fake/todos/user/jaromeroibz', requestOptions)
+            fetch('https://playground.4geeks.com/apis/fake/todos/user/javierromero', requestOptions)
                 .then(response => response.json())
                 .then(data => console.log(data));
-            
-            console.log(tasks)
 
           };
 
@@ -76,8 +51,7 @@ const Tasks = ()=>{
                   </form>
                   <ul>
                     {tasks.map((item,id) => 
-                    <li className="list-item" key={id} onMouseEnter={() => setHoveredIndex(id)} onMouseLeave={() => setHoveredIndex(null)}
-    >
+                    <li className="list-item" key={id} onMouseEnter={() => setHoveredIndex(id)} onMouseLeave={() => setHoveredIndex(null)}>
                             {item}
                             {hoveredIndex === id && (
                             <button onClick={() => deleteTask(id)}>x</button>
