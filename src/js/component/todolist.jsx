@@ -4,14 +4,8 @@ const Tasks = ()=>{
     const[tasks, setTasks]= useState([]);
     const[add, setAdd]= useState('');
     const [hoveredIndex, setHoveredIndex] = useState(null);
-
-        function getTask () {
-          console.log('leer tareas')
-          fetch('https://playground.4geeks.com/apis/fake/todos/user/javierromeror')
-          .then( (response) => response.json() )
-          .then( (data) => console.log(data) )
-        }
-        function createUser () {
+    
+        window.onload = function createUser (e) {
           e.preventDefault();
           console.log('crear usuario')
           const requestOptions = {
@@ -23,6 +17,14 @@ const Tasks = ()=>{
           .then( (response) => response.json() )
           .then( (data) => console.log(data) )
         }
+
+        function getTask () {
+          console.log('leer tareas')
+          fetch('https://playground.4geeks.com/apis/fake/todos/user/javierromeror')
+          .then( (response) => response.json() )
+          .then( (data) => console.log(data) )
+        }
+  
         function addTask (e) {
             e.preventDefault();  
             // setAdd('');
